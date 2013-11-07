@@ -2,20 +2,18 @@
 
 include 'Contact.php';
 
-$nm = 'Greg';
-$ph = 1111;
+$nm = 'Robert';
+$ph = 4455;
 
 $ct = new Contact();
 $ct->name = $nm;
 $ct->phone = $ph;
 $ct->save();
 
-$nm = 'Brian';
 echo "Now, let us find $nm\n";
 $rec = $ct->find($nm);
 foreach ($rec as $item) {
-    echo "Phone: ";
-    echo $item['phone'];
-    echo "\n";
+    $ph = $item['phone'];
+    echo "Phone: $ph\n";
 }
 ?>

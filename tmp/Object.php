@@ -10,22 +10,6 @@ class Object {
         $this->pri_key = $prikey;
     }
 
-    /*public function insert($arr) {
-
-        try {
-            foreach ($arr as $item => $val) {
-                if ($item == $this->pri_key) {
-                    $pri_value = $val;
-                }
-            }
-            $this->coll->insert($arr);
-        } catch (Exception $e) {
-            return 0;
-        }
-
-        return 1;
-    }*/
-
     public function save () {
 
         try {
@@ -49,12 +33,12 @@ class Object {
     private $coll;
     private $data = Array();
 
-    public function obj__set($name, $value) {
+    public function __set($name, $value) {
         echo "Setting '$name' to '$value'\n";
         $this->data[$name] = $value;
     }
 
-    public function obj__get($name) {
+    public function __get($name) {
         echo "Getting '$name'\n";
         if (array_key_exists($name, $this->data)) {
             return $this->data[$name];
@@ -69,7 +53,7 @@ class Object {
         return null;
     }
 
-    public function obj__isset($name) {
+    public function __isset($name) {
         echo "Is '$name' set?\n";
         if (array_key_exists($name, $this->data)) {
             return isset($this->data[$name]);

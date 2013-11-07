@@ -1,10 +1,10 @@
 <?php
 require_once 'Object.php';
 
-class Contact extends Object {
+class Vehicle extends Object {
     public function __construct () {
 
-        parent::__construct("Contact", "name");
+        parent::__construct("Vehicle", "vin");
     }
 };
 

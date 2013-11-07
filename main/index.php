@@ -1,7 +1,8 @@
 <?php
 include "_header.php";
-include "includes/dbconnect.php";
-include "includes/category.php";
+include "../includes/dbconnect.php";
+include "../includes/category.php";
+
 ?>
 
     <ul data-role="listview" data-filter="true" data-inset="true">

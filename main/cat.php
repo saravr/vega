@@ -1,7 +1,7 @@
 <?php
 include "_header.php";
-include "includes/dbconnect.php";
-include "includes/category.php";
+include "../includes/dbconnect.php";
+include "../includes/category.php";
 
 $catname = $_GET['cat'];
 
@@ -16,6 +16,10 @@ $catname = $_GET['cat'];
         }
       ?>
     </ul>
+
+<?php
+    echo "<a href=add.php?cat=$catname>Add ...</a>\n";
+?>
 
 <?php
 include "_footer.php";

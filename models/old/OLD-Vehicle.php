@@ -1,7 +1,7 @@
 <?php
 
 require_once '../includes/dbconnect.php';
-require_once '../models/Object.php';
+require_once '../includes/Object.php';
 
 class VehInfo {
 
@@ -9,12 +9,9 @@ class VehInfo {
 
 class Vehicle extends Object {
 
-    public function __construct ($db = null) {
+    public function __construct () {
 
         parent::__construct("Vehicle", "vin");
-        $this->db = $db;
-        $this->_dfld1 = 'make';
-        $this->_dfld2 = 'vin';
     }
 
     public function getMakes () {
@@ -39,6 +36,14 @@ class Vehicle extends Object {
 
     private $col = 'Vehicle';
     private $pkey = 'vin';
+    private $args_arr = array(
+                              'year' => "Integer",
+                              'make' => "String",
+                              'model' => "String",
+                              'color' => "String",
+                              'purchasedOn' => "Date",
+                              'vin' => "String",
+                          );
     private $db;
 }
 
@@ -46,17 +51,11 @@ $db = dbConnect();
 
 $vehInfo = new Vehicle($db);
 
-if (array_key_exists('req', $_GET)) {
-    if ($_GET['req'] == "makes") {
-        echo json_encode($vehInfo->getMakes());
-    } else if ($_GET['req'] == "models") {
-        $make = $_GET['make'];
-        echo json_encode($vehInfo->getModels($make));
-    } else {
-        //echo "..... .I am here .....\n";
-    }
-} else {
-    //echo "..... .I am here .....\n";
+if ($_GET['req'] == "makes") {
+    echo json_encode($vehInfo->getMakes());
+} else if ($_GET['req'] == "models") {
+    $make = $_GET['make'];
+    echo json_encode($vehInfo->getModels($make));
 }
 
 dbDisconnect($db);

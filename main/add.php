@@ -5,11 +5,7 @@ include "../includes/category.php";
 
 $catname = $_GET['cat'];
 
-if ($catname == "Vehicles") {
-    include "../views/vehicle.php";
-}
-?>
+include "../views/$catname.view.php";
 
-<?php
 include "../main/_footer.php";
 ?>

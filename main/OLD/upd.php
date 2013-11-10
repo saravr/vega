@@ -1,7 +1,18 @@
+NOT USED
+NOT USED
+NOT USED
+NOT USED
+NOT USED
+NOT USED
+NOT USED
+NOT USED
+NOT USED
+NOT USED
+
 <?php
 session_start();
 
-require_once "../models/Vehicle.php";
+include "../models/Vehicle.php";
 
 if ($_GET['src'] == "vehicle") {
     $veh = new Vehicle();
@@ -12,7 +23,11 @@ if ($_GET['src'] == "vehicle") {
     $veh->color = $_POST['selcolor'];
     $veh->purchasedOn = $_POST['selpdate'];
     $veh->save();
-    error_log("Created record '" . $veh->vin . "' id: " . $veh->id() . "\n");
+    error_log("Created record '" . $veh->vin . "\n");
+
+    header("Location: ../main/cat.php?cat=Vehicle");
+} else {
+    header("Location: ../main/cat.php");
 }
 
 ?>

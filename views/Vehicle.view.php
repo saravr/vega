@@ -1,5 +1,20 @@
-<?php if ($req == "show") { ?>
+<?php
+require_once '../models/Vehicle.php';
 
+if (isset($_POST['submit'])) {
+    $veh = new Vehicle();
+    $veh->vin = $_POST['selvin'];
+    $veh->make = $_POST['selmake'];
+    $veh->model = $_POST['selmodel'];
+    $veh->year = $_POST['selyear'];
+    $veh->color = $_POST['selcolor'];
+    $veh->purchasedOn = $_POST['selpdate'];
+    $veh->save();
+    error_log("Created record '" . $veh->vin);
+
+    header("Location: ../main/cat.php?cat=Vehicle");
+} else if ($req == "show") {
+?>
 <div data-role="content">
     <div class="content-primary">
       <ul data-role="listview" data-filter="true">
@@ -114,7 +129,7 @@
       $_SESSION['purchasedOn'] = $obj->purchasedOn;
       $_SESSION['vin'] = $obj->vin;
   ?>
-  <form action="upd.php?src=vehicle" method="POST" id="check-user" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
+  <form method="POST" id="upd-vehicle" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
     <fieldset>
       <div data-role="fieldcontain" data-theme="b">
         <select name="selyear" id="selyear">

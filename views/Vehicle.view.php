@@ -2,16 +2,18 @@
 require_once '../models/Vehicle.php';
 
 if (isset($_POST['submit'])) {
-    $veh = new Vehicle();
-    $veh->vin = $_POST['selvin'];
-    $veh->make = $_POST['selmake'];
-    $veh->model = $_POST['selmodel'];
-    $veh->year = $_POST['selyear'];
-    $veh->color = $_POST['selcolor'];
-    $veh->purchasedOn = $_POST['selpdate'];
-    $veh->save();
-    error_log("Created record '" . $veh->vin);
-
+    $cmd = $_POST['submit'];
+    if ($cmd == "Save") {
+        $veh = new Vehicle();
+        $veh->vin = $_POST['selvin'];
+        $veh->make = $_POST['selmake'];
+        $veh->model = $_POST['selmodel'];
+        $veh->year = $_POST['selyear'];
+        $veh->color = $_POST['selcolor'];
+        $veh->purchasedOn = $_POST['selpdate'];
+        $veh->save();
+        error_log("Created record '" . $veh->vin);
+    }
     header("Location: ../main/cat.php?cat=Vehicle");
 } else if ($req == "show") {
 ?>
@@ -61,7 +63,7 @@ if (isset($_POST['submit'])) {
         $("#selmodel").empty();
         var smdl = document.getElementById("selmodel");
         var newOption = document.createElement("option");
-        newOption.text = defmod;
+        newOption.text = (defmod == "") ? "Model" : defmod;
         smdl.options.add(newOption);
         $url = "../models/Vehicle.php?req=models&make=" + $mk;
         $.getJSON($url, function (json) {
@@ -100,7 +102,7 @@ if (isset($_POST['submit'])) {
 
         $("#selcolor").empty();
         var newOption = document.createElement("option");
-        newOption.text = def_color;
+        newOption.text = (defcol == "") ? "Color" : defcol;
         scol.options.add(newOption);
         $url = "../models/Colors.php?req=colors";
         $.getJSON($url, function (json) {
@@ -131,7 +133,7 @@ if (isset($_POST['submit'])) {
   ?>
   <form method="POST" id="upd-vehicle" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
     <fieldset>
-      <div data-role="fieldcontain" data-theme="b">
+      <div data-role="fieldcontain">
         <select name="selyear" id="selyear">
             <?php echo "<option>Year</option>"; ?>
             <?php
@@ -171,7 +173,7 @@ if (isset($_POST['submit'])) {
       </div>
 
       <div data-role="fieldcontain">
-        <input name="selpdate" type="date" data-role="datebox" id="defcal" data-options='{"mode": "calbox"}'/>
+        <input name="selpdate" type="date" data-role="datebox" id="defcal" data-options='{"mode": "calbox"}' placeholder='Purchase Date'/>
       </div>
 
       <div data-role="fieldcontain">
@@ -181,7 +183,15 @@ if (isset($_POST['submit'])) {
             echo "' name='selvin' id='vin' placeholder='VIN number'/>";
         ?>
       </div>
-      <input type="submit" data-theme="b" name="submit" id="submit" value="Save">
+
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <input type="submit" data-theme="b" name="submit" id="submit" value="Save">
+        </div>
+        <div class="ui-block-b">
+          <input type="submit" data-theme="b" name="submit" id="submit" value="Cancel">
+        </div>
+      </div>
     </fieldset>
   </form>
 </div>

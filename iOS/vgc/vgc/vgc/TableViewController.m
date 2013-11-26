@@ -8,6 +8,7 @@
 
 #import "TableViewController.h"
 #import "AFNetworking/AFJSONRequestOperation.h"
+#import "DetailViewController.h"
 
 @interface TableViewController ()
 
@@ -49,8 +50,8 @@
 
 -(void)loadResults
 {
-    //NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:9000/XYZ/Vehicle/find"];
-    NSURL *url = [NSURL URLWithString:@"http://ec2-54-219-87-52.us-west-1.compute.amazonaws.com:9000/XYZ/Vehicle/find"];
+    NSURL *url = [NSURL URLWithString:@"http://127.0.0.1:9000/VegaDB/Category/find"];
+    //NSURL *url = [NSURL URLWithString:@"http://ec2-54-219-87-52.us-west-1.compute.amazonaws.com:9000/VegaDB/Vehicle/find"];
     //NSURL *url = [NSURL URLWithString:@"http://localhost:28017/XYZ/Vehicle/?filter_make=Toyota"];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -104,8 +105,8 @@
     
     // Configure the cell...
     NSDictionary *tempDictionary= [self.itemsArray objectAtIndex:indexPath.row];
-    if ([tempDictionary objectForKey:@"make"] != [NSNull null]) {
-        cell.textLabel.text = [tempDictionary objectForKey:@"make"];
+    if ([tempDictionary objectForKey:@"Name"] != [NSNull null]) {
+        cell.textLabel.text = [tempDictionary objectForKey:@"Name"];
         cell.detailTextLabel.text = [tempDictionary objectForKey:@"vin"];
     }
     
@@ -152,7 +153,6 @@
 }
 */
 
-/*
 #pragma mark - Table view delegate
 
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
@@ -160,14 +160,13 @@
 {
     // Navigation logic may go here, for example:
     // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+    DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
 
     // Pass the selected object to the new view controller.
     
     // Push the view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];
+    NSLog(@"Selected ........");
 }
- 
- */
 
 @end

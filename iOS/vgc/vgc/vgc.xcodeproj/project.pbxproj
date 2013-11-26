@@ -35,6 +35,12 @@
 		253881C118306D74003883D7 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 253881B618306D74003883D7 /* AFURLConnectionOperation.m */; };
 		253881C218306D74003883D7 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 253881B818306D74003883D7 /* AFXMLRequestOperation.m */; };
 		253881C318306D74003883D7 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 253881BA18306D74003883D7 /* UIImageView+AFNetworking.m */; };
+		25C1A1001842F1BA0037E130 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C1A0FE1842F1BA0037E130 /* DetailViewController.m */; };
+		25C1A1011842F1BA0037E130 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C1A0FF1842F1BA0037E130 /* DetailViewController.xib */; };
+		25C1A1051842FDCE0037E130 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C1A1031842FDCE0037E130 /* MainViewController.m */; };
+		25C1A1061842FDCE0037E130 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C1A1041842FDCE0037E130 /* MainViewController.xib */; };
+		25C1A10A184477710037E130 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C1A108184477710037E130 /* AddViewController.m */; };
+		25C1A10B184477710037E130 /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C1A109184477710037E130 /* AddViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +99,15 @@
 		253881B818306D74003883D7 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		253881B918306D74003883D7 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		253881BA18306D74003883D7 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		25C1A0FD1842F1BA0037E130 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		25C1A0FE1842F1BA0037E130 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		25C1A0FF1842F1BA0037E130 /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		25C1A1021842FDCE0037E130 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		25C1A1031842FDCE0037E130 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		25C1A1041842FDCE0037E130 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		25C1A107184477710037E130 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		25C1A108184477710037E130 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		25C1A109184477710037E130 /* AddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +172,15 @@
 				2538815D1830630D003883D7 /* AppDelegate.m */,
 				2538815F1830630D003883D7 /* Main_iPhone.storyboard */,
 				253881621830630D003883D7 /* Main_iPad.storyboard */,
+				25C1A107184477710037E130 /* AddViewController.h */,
+				25C1A108184477710037E130 /* AddViewController.m */,
+				25C1A109184477710037E130 /* AddViewController.xib */,
+				25C1A1021842FDCE0037E130 /* MainViewController.h */,
+				25C1A1031842FDCE0037E130 /* MainViewController.m */,
+				25C1A1041842FDCE0037E130 /* MainViewController.xib */,
+				25C1A0FD1842F1BA0037E130 /* DetailViewController.h */,
+				25C1A0FE1842F1BA0037E130 /* DetailViewController.m */,
+				25C1A0FF1842F1BA0037E130 /* DetailViewController.xib */,
 				251966B91838AC7900DC4683 /* LoginViewController.h */,
 				251966BA1838AC7900DC4683 /* LoginViewController.m */,
 				251966BB1838AC7900DC4683 /* LoginViewController.xib */,
@@ -302,8 +326,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25C1A10B184477710037E130 /* AddViewController.xib in Resources */,
 				253881641830630D003883D7 /* Main_iPad.storyboard in Resources */,
 				253881691830630D003883D7 /* Images.xcassets in Resources */,
+				25C1A1011842F1BA0037E130 /* DetailViewController.xib in Resources */,
+				25C1A1061842FDCE0037E130 /* MainViewController.xib in Resources */,
 				251966BD1838AC7900DC4683 /* LoginViewController.xib in Resources */,
 				253881611830630D003883D7 /* Main_iPhone.storyboard in Resources */,
 				253881891830664B003883D7 /* TableViewController.xib in Resources */,
@@ -329,8 +356,11 @@
 				253881C118306D74003883D7 /* AFURLConnectionOperation.m in Sources */,
 				253881C318306D74003883D7 /* UIImageView+AFNetworking.m in Sources */,
 				253881BD18306D74003883D7 /* AFImageRequestOperation.m in Sources */,
+				25C1A10A184477710037E130 /* AddViewController.m in Sources */,
+				25C1A1051842FDCE0037E130 /* MainViewController.m in Sources */,
 				253881BC18306D74003883D7 /* AFHTTPRequestOperation.m in Sources */,
 				251966BC1838AC7900DC4683 /* LoginViewController.m in Sources */,
+				25C1A1001842F1BA0037E130 /* DetailViewController.m in Sources */,
 				253881BB18306D74003883D7 /* AFHTTPClient.m in Sources */,
 				253881C218306D74003883D7 /* AFXMLRequestOperation.m in Sources */,
 				253881671830630D003883D7 /* ViewController.m in Sources */,

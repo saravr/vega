@@ -10,6 +10,8 @@
 
 @interface TableViewController : UITableViewController <UITableViewDataSource> {
 }
+
+@property (weak, nonatomic) IBOutlet UITableView *catTableView;
 @property (strong, nonatomic) NSArray *itemsArray;
 
 @end

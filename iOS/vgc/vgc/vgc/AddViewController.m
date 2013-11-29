@@ -7,6 +7,7 @@
 //
 
 #import "AddViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "AFNetworking/AFJSONRequestOperation.h"
 
 @interface AddViewController ()
@@ -31,7 +32,8 @@
     
     self.itemsArray = [[NSArray alloc] init];
     self.category = @"None";
-    
+    //self.addTableView.layer.cornerRadius = 25;
+
     [self loadResults];
 }
 
@@ -77,6 +79,11 @@
 
 #pragma mark - Table view data source
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 80.0;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
@@ -85,7 +92,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    switch (section) {
+    /*switch (section) {
         case 0:
             return @"";
             //return @"Recently Used";
@@ -95,7 +102,7 @@
             
         default:
             break;
-    }
+    }*/
     
     return @"";
 }
@@ -116,9 +123,24 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    CGRect cellRect = [tableView rectForRowAtIndexPath:indexPath];
+    cell.contentView.layer.cornerRadius = 5.0;
+    gradient.frame = CGRectMake(cellRect.origin.x - tableView.contentOffset.x, cellRect.origin.y - tableView.contentOffset.y - 50 - (indexPath.row * 80), cellRect.size.width, cellRect.size.height);
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor whiteColor]CGColor], (id)[[UIColor darkGrayColor]CGColor], nil];
+    [cell.contentView.layer addSublayer:gradient];
+    NSLog(@"RECT: %d: %f / %f / %f / %f (%f / %f)", indexPath.row, cellRect.origin.x - tableView.contentOffset.x, cellRect.origin.y - tableView.contentOffset.y - 50, cellRect.size.width, cellRect.size.height, tableView.contentOffset.x, tableView.contentOffset.y);
+
     // Configure the cell...
     if (indexPath.section == 1) {
-        //cell.contentView.backgroundColor = [UIColor greenColor];
+        cell.contentView.backgroundColor = [UIColor darkGrayColor];
+        cell.textLabel.backgroundColor = [UIColor darkGrayColor];
+        [cell.textLabel setTextColor:[UIColor whiteColor]];
+        cell.detailTextLabel.backgroundColor = [UIColor darkGrayColor];
+        [cell.detailTextLabel setTextColor:[UIColor whiteColor]];
+        cell.contentView.layer.masksToBounds = YES;
+        cell.contentView.layer.cornerRadius = 5.0;
+        
         NSDictionary *tempDictionary= [self.itemsArray objectAtIndex:indexPath.row];
         if ([tempDictionary objectForKey:@"Name"] != [NSNull null]) {
             cell.textLabel.text = [tempDictionary objectForKey:@"Name"];
@@ -126,7 +148,6 @@
         }
         
         if ([self.category isEqualToString:@"Vehicle"] && [tempDictionary objectForKey:@"_dfld1"] != [NSNull null]) {
-            NSLog(@"Here .......");
             NSString *keyfld = [tempDictionary objectForKey:@"_dfld1"];
             if ([tempDictionary objectForKey:keyfld] != [NSNull null]) {
                 cell.textLabel.text = [tempDictionary objectForKey:keyfld];

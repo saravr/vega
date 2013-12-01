@@ -15,7 +15,7 @@ function showItems ($catname) {
         $val1 = $item[$dfld1];
         $dfld2 = $item['_dfld2'];
         $val2 = $item[$dfld2];
-        echo "<li><a href=#>$val1 <div class='ui-li-aside'>$val2</div></a></li>\n";
+        echo "<li><a href=../views/$catname.view.php?req=show&id=$val2>$val1 <div class='ui-li-aside'>$val2</div></a></li>\n";
     }
     echo "</ul>\n";
     echo "</div>\n";

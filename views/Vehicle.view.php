@@ -15,25 +15,14 @@ if (isset($_POST['submit'])) {
         error_log("Created record '" . $veh->vin);
     }
     header("Location: ../main/cat.php?cat=Vehicle");
-} else if ($req == "show") {
+} else if (isset($_GET['req']) && $_GET['req'] == "show") {
+
+$cat = "Vehicle";
+$_GET['cat'] = $cat;
+include "../views/show_item.php";
+
+} else {
 ?>
-<div data-role="content">
-    <div class="content-primary">
-      <ul data-role="listview" data-filter="true">
-        <?php
-            $year = $obj['year']; echo "<li>$year</li>\n";
-            $make = $obj['make']; echo "<li>$make</li>\n";
-            $model = $obj['model']; echo "<li>$model</li>\n";
-            $color = $obj['color']; echo "<li>$color</li>\n";
-            $purchasedOn = $obj['purchasedOn']; echo "<li>$purchasedOn</li>\n";
-            $vin = $obj['vin']; echo "<li>$vin</li>\n";
-        ?>
-      </ul>
-      </div>
-</div>
-
-<?php } else { ?>
-
 <script type="text/javascript">
 
     function listMakes (defmk) {

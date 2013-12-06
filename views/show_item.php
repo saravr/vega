@@ -2,7 +2,8 @@
 $cat = $_GET['cat'];
 require_once "../models/$cat.php";
 
-include "../main/_header.php";
+$_GET['pgid'] = "show_item";
+include "../views/_header.php";
 ?>
 <div data-role="content">
   <div class="content-primary">
@@ -29,5 +30,5 @@ include "../main/_header.php";
 </div>
 
 <?php
-include "../main/_footer.php";
+include "../views/_footer.php";
 ?>

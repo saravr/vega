@@ -1,5 +1,6 @@
 <?php
-include "_header.php";
+$_GET['pgid'] = "pg_cat";
+include "../views/_header.php";
 include "../includes/dbconnect.php";
 include "../includes/category.php";
 include "../views/show.php";
@@ -22,5 +23,5 @@ if (count($cats) > 0) {
     echo "</form>\n";
 }
 
-include "_footer.php";
+include "../views/_footer.php";
 ?>

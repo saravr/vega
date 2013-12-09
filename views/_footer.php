@@ -6,7 +6,7 @@ function form_edit_url () {
     return "edit.php?opt=$xxx&obj=$obj_val";
 }
 ?>
-<div data-role="footer" data-theme="b" data-id="mainFooter" data-position="fixed">
+<div data-role="footer" data-theme="a" data-id="mainFooter" data-position="fixed">
   <div data-role="navbar" data-grid="a">
     <ul class="apple-navbar-ui comboSprite">
       <li><a href="add.php" data-iconpos="notext" data-icon="add">Add</a></li>

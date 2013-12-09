@@ -1,12 +1,12 @@
 <?php
 
-include "../models/Vehicle.php";
+include "../models/all.php";
 
 function showItems ($catname) {
 
     echo "<div data-role=content>\n";
     echo "<div class=content-primary>\n";
-    echo "<ul data-role=listview data-inset=true>\n";
+    echo "<ul data-role=listview data-inset=true data-theme=a>\n";
 
     $obj = new $catname;
     $rec = $obj->findAll();

@@ -25,12 +25,13 @@
 </head> 
 <body> 
 
-<div data-role=page data-add-back-btn=true data-icon=back data-iconpos=notext>
-  <div data-role=header data-theme=b>
+<div data-role=page data-add-back-btn=true data-icon="back" data-iconpos="notext">
+  <div data-role=header data-theme=a>
 <!--
     <a href="../main/index.php" data-icon="home" data-iconpos="notext" data-transition="fade">Home</a>
 -->
     <h1>MyInfo</h1>
+    <a href="../main/index.php" data-icon="home" data-iconpos="notext" data-transition="fade" class="ui-btn-right">Home</a>
 <!--
     <a href="./" data-icon="back" data-role="back" data-iconpos="notext" data-transition="fade">Back</a>
 -->

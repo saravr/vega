@@ -1,34 +1,32 @@
 <?php
-require_once '../models/Vehicle.php';
+require_once '../models/all.php';
 
 if (isset($_POST['submit'])) {
     $cmd = $_POST['submit'];
     if ($cmd == "Save") {
-        $veh = new Vehicle();
-        $veh->vin = $_POST['selvin'];
-        $veh->make = $_POST['selmake'];
-        $veh->model = $_POST['selmodel'];
-        $veh->year = $_POST['selyear'];
-        $veh->color = $_POST['selcolor'];
-        $veh->purchasedOn = $_POST['selpdate'];
-        $veh->save();
-        error_log("Created record '" . $veh->vin);
+        $obj = new Vehicle();
+        foreach ($obj->fields as $fld) {
+            $key = 'sel_' . $fld;
+            $obj->$fld = $_POST[$key];
+        }
+        $obj->save();
+        error_log("Created record '" . $obj->vin . "'");
     }
     header("Location: ../main/cat.php?cat=Vehicle");
-} else if (isset($_GET['req']) && $_GET['req'] == "show") {
 
-$cat = "Vehicle";
-$_GET['cat'] = $cat;
-include "../views/show_item.php";
+} else if (isset($_GET['req']) && $_GET['req'] == "show") {
+    $cat = "Vehicle";
+    $_GET['cat'] = $cat;
+    include "../views/show_item.php";
 
 } else {
 ?>
 <script type="text/javascript">
 
     function listMakes (defmk) {
-        var smk = document.getElementById("selmake");
+        var smk = document.getElementById("sel_make");
 
-        $("#selmake").empty();
+        $("#sel_make").empty();
         var newOption = document.createElement("option");
         newOption.text = (defmk == "") ? "Make" : defmk;
         smk.options.add(newOption);
@@ -47,10 +45,10 @@ include "../views/show_item.php";
     }
 
     function listModels (defmod) {
-        $mk = $("#selmake").val();
+        $mk = $("#sel_make").val();
 
-        $("#selmodel").empty();
-        var smdl = document.getElementById("selmodel");
+        $("#sel_model").empty();
+        var smdl = document.getElementById("sel_model");
         var newOption = document.createElement("option");
         newOption.text = (defmod == "") ? "Model" : defmod;
         smdl.options.add(newOption);
@@ -69,11 +67,11 @@ include "../views/show_item.php";
     }
 
     $(function() {
-        $('#selmake').bind('change',function() {
-            $mk = $("#selmake").val();
+        $('#sel_make').bind('change',function() {
+            $mk = $("#sel_make").val();
 
-            $("#selmodel").empty();
-            var smdl = document.getElementById("selmodel");
+            $("#sel_model").empty();
+            var smdl = document.getElementById("sel_model");
             $url = "../models/Vehicle.php?req=models&make=" + $mk;
             $.getJSON($url, function (json) {
                 $.each(json, function (key, val) {
@@ -87,9 +85,9 @@ include "../views/show_item.php";
     });
 
     function listColors (defcol) {
-        var scol = document.getElementById("selcolor");
+        var scol = document.getElementById("sel_color");
 
-        $("#selcolor").empty();
+        $("#sel_color").empty();
         var newOption = document.createElement("option");
         newOption.text = (defcol == "") ? "Color" : defcol;
         scol.options.add(newOption);
@@ -108,7 +106,7 @@ include "../views/show_item.php";
     }
 </script>
 
-<div data-role="content" data-theme="b">
+<div data-role="content" data-theme="a">
   <?php
       $obj_json = $_SESSION['obj'];
       $obj = json_decode($obj_json);
@@ -123,7 +121,7 @@ include "../views/show_item.php";
   <form method="POST" id="upd-vehicle" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
     <fieldset>
       <div data-role="fieldcontain">
-        <select name="selyear" id="selyear">
+        <select name="sel_year" id="sel_year">
             <?php echo "<option>Year</option>"; ?>
             <?php
                 for ($yr = 2014; $yr > 1900; $yr--) {
@@ -135,7 +133,7 @@ include "../views/show_item.php";
       </div>
 
       <div data-role="fieldcontain">
-        <select name="selmake" id="selmake">
+        <select name="sel_make" id="sel_make">
         <script>
             var def_make = "<?php echo $_SESSION['make'] ?>";
             listMakes(def_make);
@@ -144,7 +142,7 @@ include "../views/show_item.php";
       </div>
 
       <div data-role="fieldcontain">
-        <select name="selmodel" id="selmodel">
+        <select name="sel_model" id="sel_model">
         <script>
             var def_model = "<?php echo $_SESSION['model'] ?>";
             listModels(def_model);
@@ -153,7 +151,7 @@ include "../views/show_item.php";
       </div>
 
       <div data-role="fieldcontain">
-        <select name="selcolor" id="selcolor">
+        <select name="sel_color" id="sel_color">
         <script>
             var def_color = "<?php echo $_SESSION['color'] ?>";
             listColors(def_color);
@@ -162,23 +160,23 @@ include "../views/show_item.php";
       </div>
 
       <div data-role="fieldcontain">
-        <input name="selpdate" type="date" data-role="datebox" id="defcal" data-options='{"mode": "calbox"}' placeholder='Purchase Date'/>
+        <input name="sel_purchasedOn" type="date" data-role="datebox" id="defcal" data-options='{"mode": "calbox"}' placeholder='Purchase Date'/>
       </div>
 
       <div data-role="fieldcontain">
         <?php
             echo "<input type='text' value='";
             echo $_SESSION['vin'];
-            echo "' name='selvin' id='vin' placeholder='VIN number'/>";
+            echo "' name='sel_vin' id='vin' placeholder='VIN number'/>";
         ?>
       </div>
 
       <div class="ui-grid-a">
         <div class="ui-block-a">
-          <input type="submit" data-theme="b" name="submit" id="submit" value="Save">
+          <input type="submit" data-theme="a" name="submit" id="submit" value="Save">
         </div>
         <div class="ui-block-b">
-          <input type="submit" data-theme="b" name="submit" id="submit" value="Cancel">
+          <input type="submit" data-theme="a" name="submit" id="submit" value="Cancel">
         </div>
       </div>
     </fieldset>

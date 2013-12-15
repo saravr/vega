@@ -20,9 +20,11 @@ if (isset($_POST['submit'])) {
     include "../views/show_item.php";
 
 } else {
+    $cat = "Vehicle";
+    //echo "<script type=text/javascript src=../views/$cat.js>\n";
 ?>
-<script type="text/javascript">
 
+<script type=text/javascript>
     function listMakes (defmk) {
         var smk = document.getElementById("sel_make");
 
@@ -118,7 +120,7 @@ if (isset($_POST['submit'])) {
       $_SESSION['purchasedOn'] = $obj->purchasedOn;
       $_SESSION['vin'] = $obj->vin;
   ?>
-  <form method="POST" id="upd-vehicle" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
+  <form method="POST" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
     <fieldset>
       <div data-role="fieldcontain">
         <select name="sel_year" id="sel_year">

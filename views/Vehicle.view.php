@@ -5,7 +5,7 @@ if (isset($_POST['submit'])) {
     $cmd = $_POST['submit'];
     if ($cmd == "Save") {
         $obj = new Vehicle();
-        foreach ($obj->fields as $fld) {
+        foreach ($obj->_fields as $fld) {
             $key = 'sel_' . $fld;
             $obj->$fld = $_POST[$key];
         }
@@ -24,101 +24,21 @@ if (isset($_POST['submit'])) {
     //echo "<script type=text/javascript src=../views/$cat.js>\n";
 ?>
 
-<script type=text/javascript>
-    function listMakes (defmk) {
-        var smk = document.getElementById("sel_make");
-
-        $("#sel_make").empty();
-        var newOption = document.createElement("option");
-        newOption.text = (defmk == "") ? "Make" : defmk;
-        smk.options.add(newOption);
-        $url = "../models/Vehicle.php?req=makes";
-        $.getJSON($url, function (json) {
-            $.each(json, function(key, val) {
-                var newOption = document.createElement("option");
-                newOption.value = val.make;
-                newOption.innerHTML = val.make;
-                if (val.make == defmk) {
-                    newOption.selected = true;
-                }
-                smk.options.add(newOption);
-            });
-        });
-    }
-
-    function listModels (defmod) {
-        $mk = $("#sel_make").val();
-
-        $("#sel_model").empty();
-        var smdl = document.getElementById("sel_model");
-        var newOption = document.createElement("option");
-        newOption.text = (defmod == "") ? "Model" : defmod;
-        smdl.options.add(newOption);
-        $url = "../models/Vehicle.php?req=models&make=" + $mk;
-        $.getJSON($url, function (json) {
-            $.each(json, function (key, val) {
-                var newOption = document.createElement("option");
-                newOption.value = val.model;
-                newOption.innerHTML = val.model;
-                if (val.model == defmod) {
-                    newOption.selected = true;
-                }
-                smdl.options.add(newOption);
-            });
-        });
-    }
-
-    $(function() {
-        $('#sel_make').bind('change',function() {
-            $mk = $("#sel_make").val();
-
-            $("#sel_model").empty();
-            var smdl = document.getElementById("sel_model");
-            $url = "../models/Vehicle.php?req=models&make=" + $mk;
-            $.getJSON($url, function (json) {
-                $.each(json, function (key, val) {
-                    var newOption = document.createElement("option");
-                    newOption.value = val.model;
-                    newOption.innerHTML = val.model;
-                    smdl.options.add(newOption);
-                });
-            });
-        });
-    });
-
-    function listColors (defcol) {
-        var scol = document.getElementById("sel_color");
-
-        $("#sel_color").empty();
-        var newOption = document.createElement("option");
-        newOption.text = (defcol == "") ? "Color" : defcol;
-        scol.options.add(newOption);
-        $url = "../models/Colors.php?req=colors";
-        $.getJSON($url, function (json) {
-            $.each(json, function(key, val) {
-                var newOption = document.createElement("option");
-                newOption.value = val.color;
-                newOption.innerHTML = val.color;
-                if (val.color == defcol) {
-                    newOption.selected = true;
-                }
-                scol.options.add(newOption);
-            });
-        });
-    }
+<script type=text/javascript src=../views/Vehicle.js>
 </script>
 
 <div data-role="content" data-theme="a">
   <?php
       $obj_json = $_SESSION['obj'];
       $obj = json_decode($obj_json);
-      error_log("CHK: " . $obj->make);
-      $_SESSION['year'] = $obj->year;
-      $_SESSION['make'] = $obj->make;
-      $_SESSION['model'] = $obj->model;
-      $_SESSION['color'] = $obj->color;
-      $_SESSION['purchasedOn'] = $obj->purchasedOn;
-      $_SESSION['vin'] = $obj->vin;
+      //$obj = new Vehicle();
+      if (isset($obj->_fields)) {
+          foreach ($obj->_fields as $fld) {
+              if (isset($obj->$fld)) {
+                  $_SESSION[$fld] = $obj->$fld;
+              }
+          }
+      }
   ?>
   <form method="POST" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
     <fieldset>

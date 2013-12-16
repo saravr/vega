@@ -26,6 +26,18 @@ include "../views/_header.php";
     <?php
       dbDisconnect($db);
     ?>
+
+    <form action=../main/edit.php method=get>
+      <input type=hidden name=cat value=$cat/>
+      <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <input type=submit data-theme=a value=Edit>
+        </div>
+        <div class="ui-block-b">
+          <input type=submit data-theme=a value=Delete>
+        </div>
+    </form>
+
   </div>
 </div>
 

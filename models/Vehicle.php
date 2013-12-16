@@ -15,7 +15,7 @@ class Vehicle extends Object {
         $this->db = $db;
         $this->_dfld1 = 'make';
         $this->_dfld2 = 'vin';
-        $this->fields = array('vin', 'make', 'model', 'year', 'color', 'purchasedOn');
+        $this->_fields = array('vin', 'make', 'model', 'year', 'color', 'purchasedOn');
     }
 
     public function getMakes () {

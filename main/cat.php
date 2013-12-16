@@ -17,7 +17,7 @@ if (count($cats) > 0) {
     echo "</ul>\n";
 } else {
     showItems($catname);
-    echo "<form action=add.php method=get>\n";
+    echo "<form action=../main/add.php method=get>\n";
     echo "<input type=hidden name=cat value=\"$catname\"/>\n";
     echo "<input type=submit data-theme=a value=Add>\n";
     echo "</form>\n";

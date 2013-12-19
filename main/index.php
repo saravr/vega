@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "../views/_header.php";
 include "../includes/dbconnect.php";
 include "../includes/category.php";

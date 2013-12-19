@@ -1,4 +1,5 @@
 <?php
+session_start();
 $_GET['pgid'] = "pg_cat";
 include "../views/_header.php";
 include "../includes/dbconnect.php";

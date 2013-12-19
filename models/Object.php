@@ -13,7 +13,15 @@ class Object {
     public function save () {
 
         try {
-            $this->coll->insert($this->data);
+            $kyfld = $this->pri_key;
+            if (isset($this->$kyfld)) {
+                $kyval = $this->$kyfld;
+                $this->coll->update(array($this->pri_key => $kyval),
+                                    $this->data,
+                                    array("upsert" => true));
+            } else {
+                $this->coll->insert($this->data);
+            }
         } catch (Exception $e) {
             //echo "Exception: $e\n";
             return 0;
@@ -29,6 +37,16 @@ class Object {
     public function findAll () {
 
         return $this->coll->find();
+    }
+
+    public function toJSON () {
+        $var = get_object_vars($this);
+        foreach ($var as &$value) {
+           if (is_object($value) && method_exists($value,'getJsonData')) {
+              $value = $value->toJSON();
+           }
+        }
+        return $var;
     }
 
     private $db_name = 'XYZ';

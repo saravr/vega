@@ -1,8 +1,10 @@
 <?php
+session_start();
 $cat = $_GET['cat'];
 require_once "../models/$cat.php";
 
 $_GET['pgid'] = "show_item";
+$idd = $_GET['id'];
 include "../views/_header.php";
 ?>
 <div data-role="content">
@@ -11,8 +13,9 @@ include "../views/_header.php";
       <?php
         $db = dbConnect();
         $obj = new $cat($db);
-        $idd = $_GET['id'];
         $obj = $obj->find($idd);
+        $obj_json = json_encode($obj);
+        $_SESSION['obj'] = $obj_json;
 
         foreach ($obj as $item) {
             foreach ($item as $ky => $val) {
@@ -28,7 +31,8 @@ include "../views/_header.php";
     ?>
 
     <form action=../main/edit.php method=get>
-      <input type=hidden name=cat value=$cat/>
+      <input type=hidden name=cat value=<?php echo "$cat"; ?> />
+      <input type=hidden name=id value=<?php echo "$idd"; ?> />
       <div class="ui-grid-a">
         <div class="ui-block-a">
           <input type=submit data-theme=a value=Edit>

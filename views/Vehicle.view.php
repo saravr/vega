@@ -1,46 +1,48 @@
 <?php
+session_start();
 require_once '../models/all.php';
 
 if (isset($_POST['submit'])) {
     $cmd = $_POST['submit'];
+    $cat = $_POST['cat'];
     if ($cmd == "Save") {
-        $obj = new Vehicle();
+        $obj = new $cat();
         foreach ($obj->_fields as $fld) {
             $key = 'sel_' . $fld;
             $obj->$fld = $_POST[$key];
         }
         $obj->save();
+        $_SESSION['obj'] = json_encode($obj);
         error_log("Created record '" . $obj->vin . "'");
     }
-    header("Location: ../main/cat.php?cat=Vehicle");
+    header("Location: ../main/cat.php?cat=$cat");
 
 } else if (isset($_GET['req']) && $_GET['req'] == "show") {
-    $cat = "Vehicle";
-    $_GET['cat'] = $cat;
     include "../views/show_item.php";
 
 } else {
-    $cat = "Vehicle";
-    //echo "<script type=text/javascript src=../views/$cat.js>\n";
+    $cat = $_GET['cat'];
+    echo "<script type=text/javascript src=../views/$cat.js> </script>\n";
 ?>
-
-<script type=text/javascript src=../views/Vehicle.js>
-</script>
 
 <div data-role="content" data-theme="a">
   <?php
-      $obj_json = $_SESSION['obj'];
-      $obj = json_decode($obj_json);
-      //$obj = new Vehicle();
-      if (isset($obj->_fields)) {
-          foreach ($obj->_fields as $fld) {
-              if (isset($obj->$fld)) {
-                  $_SESSION[$fld] = $obj->$fld;
+      if ((isset($req) && $req == "edit") && (isset($obj_id))) {
+          $db = dbConnect();
+          $obj = new $cat($db);
+          $data = $obj->find($obj_id);
+          dbDisconnect($db);
+
+          foreach ($data as $item) {
+              foreach ($obj->_fields as $fld) {
+                  $_SESSION[$fld] = $item[$fld];
               }
           }
       }
+
   ?>
   <form method="POST" class="ui-body ui-body-a ui-corner-all" data-ajax="false">
+    <input type=hidden name=cat value=<?php echo $cat; ?> />
     <fieldset>
       <div data-role="fieldcontain">
         <select name="sel_year" id="sel_year">
